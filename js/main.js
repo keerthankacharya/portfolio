@@ -64,3 +64,21 @@ var tagCloud = TagCloud('.Sphere', Texts, {
 });
 var color = 'yellow';
 document.querySelector('.Sphere').style.color = color;
+
+document.getElementById('contact_form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    fetch(this.action, {
+      method: 'POST',
+      body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        window.location.href = 'thankyou/index.html';
+        this.reset();
+    })
+    .catch(error => {
+      console.error('Error submitting form:', error);
+      alert('Something went wrong. Please try again later.');
+    });
+  });
